@@ -1,0 +1,186 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Spin Game</title>
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.box {
+    height: 80vh;
+    width: 100%;
+    background: darkcyan;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.display {
+    height: 300px;
+    width: 480px;
+    padding: 10px;
+    background: lightgoldenrodyellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#one {
+    height: 150px;
+    width: 150px;
+    border: none;
+}
+/* .img1 {
+    height: 150px;
+    width: 150px;
+    border: none;
+} */
+#two {
+    height: 150px;
+    width: 150px;
+    border: none;
+}
+/* .img2 {
+    height: 150px;
+    width: 150px;
+    border: none; 
+}*/
+#btnone {
+    height: 60px;
+    width: 120px;
+    border-radius: 20px;
+    font-size: 28px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    background: lightskyblue;
+    cursor: pointer;
+}
+#btntwo {
+    height: 60px;
+    width: 120px;
+    border-radius: 20px;
+    font-size: 28px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    background: lightgreen;
+    cursor: pointer;
+}
+.btn {
+    height: 60px;
+    width: 120px;
+    border-radius: 20px;
+    font-size: 28px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    background: lightsalmon;
+    cursor: pointer;
+    box-shadow: 0px 2px 4px 8px rgba(200, 69, 57, 0.5);
+}
+#pone {
+    font-size: 28px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: black;
+}
+#ptwo {
+    font-size: 28px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    color: black;
+}
+</style>
+<body>
+    <center>
+        <div class="box">
+   <div class="display">
+    <div class="player-one">
+        <img id="one" class="img1" src="play.png"><br/>
+        <button id="btnone" onclick="playerone()">Player-1</button>
+        <p id="pone"></p>
+    </div>
+
+    <div class="player-two">
+        <img id="two" class="img2" src="play.png"><br/>
+        <button id="btntwo" onclick="playertwo()">Player-2</button>
+        <p id="ptwo"></p>
+    </div>
+</div><br/>
+    <div class="button">
+<button class="btn" onclick="bt()">Restart</button>
+    </div>
+
+</div>
+</center>
+  
+</body>
+<script>
+let dice = ["dice1.png","dice2.png","dice3.png","dice4.png","dice5.png","dice6.png"];
+let sumone = 0;
+let sumtwo = 0;
+let finallimit = 0;
+let temp = 0;
+function playerone() {
+let num = Math.floor((Math.random()*6));
+document.getElementById('one').src=(dice[num]);
+finallimit = finallimit+1;
+document.getElementById('btnone').setAttribute("disabled", "disabled");
+document.getElementById('btntwo').removeAttribute("disabled");
+temp = num+1;
+
+if (finallimit>12)
+{
+    alert ("Chance is over")
+    win();
+    document.getElementById('btnone').setAttribute("disabled", "disabled");
+}
+else {
+
+    num = Math.floor((Math.random()*6));
+    //sumone = sumone+num;
+    sumone = sumone+temp;
+    document.getElementById("pone").innerHTML=sumone;
+}
+}
+
+function playertwo() {
+    let numtwo = Math.floor((Math.random()*6));
+    document.getElementById('two').src=(dice[numtwo]);
+    finallimit = finallimit+1;
+document.getElementById('btntwo').setAttribute("disabled", "disabled");
+document.getElementById('btnone').removeAttribute("disabled");
+temp = numtwo+1;
+if (finallimit>12)
+{
+    alert ("Chance is over")
+    win();
+    document.getElementById('btntwo').setAttribute("disabled", "disabled");
+}
+else {
+     numtwo = Math.floor((Math.random()*6));
+    //sumtwo = sumtwo+numtwo;
+    sumtwo = sumtwo+temp;
+    document.getElementById("ptwo").innerHTML=sumtwo;
+}
+}
+
+function win() {
+    if (sumone>sumtwo) {
+        alert("Player-1 Won")
+    }
+    else if (sumone==sumtwo) {
+        alert("Match Drawn")
+    }
+    else (
+        alert("Player-2 Won")
+    )
+}
+
+function bt() {
+ window.location.reload();
+        }
+</script>
+</html>
